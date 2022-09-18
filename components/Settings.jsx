@@ -21,6 +21,15 @@ module.exports = class Settings extends React.Component {
                opened={getSetting('notificationsExpanded', false)}
                onChange={() => updateSetting('notificationsExpanded', !getSetting('notificationsExpanded', false))}
             >
+               <TextInput
+                  note={'Notify via webhook.'}
+                  value={getSetting('webhookURL', '')}
+                  onChange={(value) => {
+                     updateSetting('webhookURL', value.length === 0 ? '' : value);
+                  }}
+               >
+                  Webhook URL
+               </TextInput>
                <SwitchItem
                   note={'Display in-app toasts.'}
                   value={getSetting('appToasts', true)}
@@ -68,7 +77,14 @@ module.exports = class Settings extends React.Component {
                   value={getSetting('kick', true)}
                   onChange={() => toggleSetting('kick')}
                >
-                  Kick/Ban
+                  Kick
+               </SwitchItem>
+               <SwitchItem
+                  note={'Display notifications when you get banned from a server.'}
+                  value={getSetting('ban', true)}
+                  onChange={() => toggleSetting('ban')}
+               >
+                  Ban
                </SwitchItem>
                <SwitchItem
                   note={'Display notifications when you get kicked from a group chat.'}
@@ -135,11 +151,18 @@ module.exports = class Settings extends React.Component {
                   Cancelled Friend Request Text
                </TextInput>
                <TextInput
-                  value={getSetting('kickText', "You've been kicked/banned from %servername")}
+                  value={getSetting('kickText', "You've been kicked from %servername")}
                   onChange={(v) => updateSetting('kickText', v)}
-                  note={'The text the notification will have when you get kicked/banned from a server.'}
+                  note={'The text the notification will have when you get kicked from a server.'}
                >
-                  Kicked/Banned Text
+                  Kicked Text
+               </TextInput>
+               <TextInput
+                  value={getSetting('banText', "You've been banned from %servername")}
+                  onChange={(v) => updateSetting('banText', v)}
+                  note={'The text the notification will have when you get banned from a server.'}
+               >
+                  Banned Text
                </TextInput>
                <TextInput
                   value={getSetting('groupText', "You've been removed from the group %groupname")}

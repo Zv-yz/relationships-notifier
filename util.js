@@ -12,7 +12,7 @@ module.exports.NotifyWebhook = async function(Webhook, Data) {
    .catch(async (err) => {
       switch (err.statusCode) {
          case 404:
-            console.warn('[RN-WARNING] 401 - Probably webhook deleted');
+            console.warn('[RN-WARNING] 404 - Probably webhook deleted');
             break;
          case 429:
             console.warn(`[RN-WARNING] 429 - Ratelimited, waiting for ${err.body.retry_after} seconds`);

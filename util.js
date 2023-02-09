@@ -19,7 +19,7 @@ module.exports.NotifyWebhook = async function(Webhook, Data) {
             await sleep(err.body.retry_after);
             break;
          case 401:
-            console.warn(`[RN-WARNING] 429 - Deleted? No permission? No token?`);
+            console.warn(`[RN-WARNING] 401 - Deleted? No permission? No token?`);
             break;
          default:
             console.warn(`[RN-WARNING] ${err.statusCode} - Unknown error`);
